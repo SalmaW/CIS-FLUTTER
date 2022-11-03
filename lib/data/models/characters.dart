@@ -1,3 +1,4 @@
+//model
 class Character {
   late int charId;
   late String name;
