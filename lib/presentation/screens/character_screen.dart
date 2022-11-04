@@ -4,6 +4,7 @@ import 'package:untitled/constants/my_colors.dart';
 
 import '../../business_logic/character_cubit.dart';
 import '../../data/models/characters.dart';
+import '../widgets/characters_item.dart';
 
 class CharacterScreen extends StatefulWidget {
   const CharacterScreen({Key? key}) : super(key: key);
@@ -67,11 +68,12 @@ class _CharacterScreenState extends State<CharacterScreen> {
         shrinkWrap: true,
         physics: const ClampingScrollPhysics(),
         padding: EdgeInsets.zero,
+        itemCount: allCharacters.length,
         itemBuilder: (ctx, index) {
           //ctx == context
-          //TODO: Not done
-          return CharacterItem();
-        });
+          return CharacterItem(character: allCharacters[index],);
+        },
+    );
   }
 
   @override

@@ -28,6 +28,6 @@ class CharactersWebServices {
       print(e.toString());
       return [];
     }
-    ;
+
   }
 }
