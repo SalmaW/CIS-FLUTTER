@@ -21,15 +21,27 @@ class AppRouter {
     switch (settings.name) {
       case characterScreen:
         return MaterialPageRoute(
-            builder: (_) => BlocProvider(//create the cubit
-                  create: (BuildContext context) => charactersCubit,
-                      // CharacterCubit(charactersRipo),
-                  child: CharacterScreen(),
-                ));
+          builder: (_) =>
+              BlocProvider(
+                //create the cubit
+                create: (BuildContext context) => charactersCubit,
+                // CharacterCubit(charactersRipo),
+                child: CharacterScreen(),
+              ),
+        );
         break;
       case characterDetailsScreen:
         final character = settings.arguments as Character;
-        return MaterialPageRoute(builder: (_) => CharacterDetailsScreen(character: character,));
+
+        return MaterialPageRoute(
+          builder: (_) =>
+              BlocProvider(
+                create: (BuildContext context) => CharacterCubit(charactersRipo),
+                child: CharacterDetailsScreen(
+                  character: character,
+                ),
+              ),
+        );
         break;
       default:
     }
