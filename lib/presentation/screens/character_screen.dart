@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_offline/flutter_offline.dart';
 import 'package:untitled/constants/my_colors.dart';
 import '../../business_logic/character_cubit.dart';
 import '../../data/models/characters.dart';
 import '../widgets/characters_item.dart';
-
 
 class CharacterScreen extends StatefulWidget {
   const CharacterScreen({Key? key}) : super(key: key);
@@ -15,7 +15,7 @@ class CharacterScreen extends StatefulWidget {
 
 class _CharacterScreenState extends State<CharacterScreen> {
   late List<Character> allCharacters;
-  late List<Character> searchedForCharacters;//the list with searched items
+  late List<Character> searchedForCharacters; //the list with searched items
   bool _isSearching = false;
   final _searchTextController = TextEditingController();
 
@@ -157,6 +157,27 @@ class _CharacterScreenState extends State<CharacterScreen> {
     );
   }
 
+  Widget buildNoInternetWidget() {
+    return Center(
+      child: Container(
+        color: Colors.white,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            SizedBox(
+              height: 20,
+            ),
+            Text(
+              'try connecting to your network',
+              style: TextStyle(fontSize: 22, color: MyColors.myYellow,),
+            ),
+            Image.asset('assets/images/signal_searching.png'),
+          ],
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -170,7 +191,18 @@ class _CharacterScreenState extends State<CharacterScreen> {
         title: _isSearching ? _buildSearchField() : _buildAppBarTitle(),
         actions: _buildAppBarActions(),
       ),
-      body: buildBlocWidget(),
+      body: OfflineBuilder(
+        connectivityBuilder: (BuildContext context,
+            ConnectivityResult connectivity, Widget child) {
+          final bool connected = connectivity != ConnectivityResult.none;
+          if (connected) {
+            return buildBlocWidget();
+          } else {
+            return buildNoInternetWidget();
+          }
+        },
+        child: showLoadingIndicator(),
+      ),
     );
   }
 }
