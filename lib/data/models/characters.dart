@@ -9,6 +9,7 @@ class Character {
   late List<dynamic> appearance;
   late String actorName;
   late String category;
+  late String birthday;
   late List<dynamic> betterCallSaulAppearance;
 
   Character.fromJson(Map<String, dynamic> json){
@@ -21,6 +22,7 @@ class Character {
     appearance = json['appearance'];
     actorName = json['portrayed'];
     category = json['category'];
+    birthday = json['birthday'];
     betterCallSaulAppearance = json['better_call_saul_appearance'];
   }
 }

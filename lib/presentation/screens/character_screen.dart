@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:untitled/constants/my_colors.dart';
-
 import '../../business_logic/character_cubit.dart';
 import '../../data/models/characters.dart';
 import '../widgets/characters_item.dart';
+
 
 class CharacterScreen extends StatefulWidget {
   const CharacterScreen({Key? key}) : super(key: key);
@@ -15,7 +15,7 @@ class CharacterScreen extends StatefulWidget {
 
 class _CharacterScreenState extends State<CharacterScreen> {
   late List<Character> allCharacters;
-  late List<Character> searchedForCharacters;
+  late List<Character> searchedForCharacters;//the list with searched items
   bool _isSearching = false;
   final _searchTextController = TextEditingController();
 
@@ -49,7 +49,7 @@ class _CharacterScreenState extends State<CharacterScreen> {
         IconButton(
             onPressed: () {
               _clearSearch();
-              Navigator.pop(context); //will reture the main home screen
+              Navigator.pop(context); //will return the main home screen
             },
             icon: Icon(Icons.clear, color: MyColors.myGrey)),
       ];

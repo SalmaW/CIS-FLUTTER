@@ -5,6 +5,7 @@ import 'package:untitled/presentation/screens/character_detals_screen.dart';
 import 'package:untitled/presentation/screens/character_screen.dart';
 import 'business_logic/character_cubit.dart';
 import 'constants/strings.dart';
+import 'data/models/characters.dart';
 import 'data/web_services/characters_web_services.dart';
 
 class AppRouter {
@@ -27,7 +28,8 @@ class AppRouter {
                 ));
         break;
       case characterDetailsScreen:
-        return MaterialPageRoute(builder: (_) => CharacterDetailsScreen());
+        final character = settings.arguments as Character;
+        return MaterialPageRoute(builder: (_) => CharacterDetailsScreen(character: character,));
         break;
       default:
     }
